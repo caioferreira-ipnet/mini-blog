@@ -1,29 +1,96 @@
+# ==========================================
 # Dependencies
+# ==========================================
 node_modules/
-/.pnp
+.pnp/
 .pnp.js
 
-# Testing
-/coverage
-
-# Production build
-/dist
+# ==========================================
+# Production Builds & Outputs
+# ==========================================
+dist/
 dist-ssr/
 build/
+out/
+.next/
 
-# Environment variables & secrets
+# ==========================================
+# Testing & Code Coverage
+# ==========================================
+coverage/
+*.lcov
+.nyc_output/
+
+# ==========================================
+# Environment Variables & Secret Configs
+# ==========================================
 .env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env.*.local
 .env.*
-!.env.example
+*.env
+*.env.*
 *.local
+!.env.example
+!.env.template
 
-# Firebase & Cloud keys / credentials
+# ==========================================
+# Cloud, Firebase & API Credentials / Keys
+# ==========================================
+# Firebase / Cloud config files
+config.js
+!config.example.js
+*credentials*.json
 *-credentials.json
+serviceAccount*.json
 serviceAccountKey.json
+client_secret*.json
+firebase-adminsdk*.json
+google-services.json
+GoogleService-Info.plist
+auth.json
+
+# Certificates & Private Keys
 *.pem
 *.key
+*.pfx
+*.p12
+*.pkcs12
+*.crt
+*.cer
+*.der
+*.keystore
+*.jks
 
-# Logs
+# SSH & GPG Keys
+id_rsa*
+id_ed25519*
+id_ecdsa*
+id_dsa*
+secring.gpg
+secring.skr
+*.gpg
+*.secret
+*.secrets
+
+# ==========================================
+# Database & Backup Files
+# ==========================================
+*.sqlite
+*.sqlite3
+*.db
+*.db-journal
+*.sql
+*.dump
+*.bak
+*.backup
+
+# ==========================================
+# Logs & Debugging
+# ==========================================
 logs/
 *.log
 npm-debug.log*
@@ -32,15 +99,40 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-# Editor directories and files
+# ==========================================
+# Cache & Temporary Files
+# ==========================================
+.cache/
+.parcel-cache/
+.eslintcache
+.stylelintcache
+.temp/
+tmp/
+
+# ==========================================
+# Operating System & Editor Files
+# ==========================================
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+[Dd]esktop.ini
+
+# Editors & IDEs
+.idea/
 .vscode/*
 !.vscode/extensions.json
-.idea/
-.DS_Store
-Thumbs.db
+!.vscode/settings.json
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
-
+*~
