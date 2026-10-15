@@ -1,3 +1,16 @@
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+.App {
+  min-height: 100vh; /* ocupa pelo menos a altura da tela */
+  display: flex;
+  flex-direction: column;
+}
+
 .container {
-  height: 100vh;
+  flex: 1; /* cresce e empurra o footer pra baixo */
 }
