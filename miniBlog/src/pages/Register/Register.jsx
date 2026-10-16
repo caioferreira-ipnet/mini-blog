@@ -35,12 +35,12 @@ const Register = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.titles}>
+      <div className="titles">
         <h1>Cadastre-se para postar!</h1>
         <h3>Crie seu usuário e compartilhe as suas histórias!</h3>
       </div>
 
-      <form className={styles.form} onSubmit={handleSubmit}>
+      <form className="form" onSubmit={handleSubmit}>
         <label>
           <span>Nome: </span>
           <input

@@ -24,6 +24,7 @@ export const useAuthentication = () => {
     }
   };
 
+  //Criando usuário
   const createUser = async (data) => {
     checkIfIsCancelled();
     setLoading(true);
@@ -57,13 +58,61 @@ export const useAuthentication = () => {
     setLoading(false);
   };
 
+  const login = async (data) => {
+    checkIfIsCancelled();
+    setLoading(true);
+    setError(null);
+
+    try {
+      await signInWithEmailAndPassword(auth, data.email, data.password);
+    } catch (error) {
+      console.log(error.message);
+
+      let systemErrorMessage;
+
+      if (error.message.includes("user-not-found")) {
+        systemErrorMessage = "Usuário não encontrado.";
+      } else if (error.message.includes("wrong-password")) {
+        systemErrorMessage = "Senha incorreta.";
+      } else if (error.message.includes("invalid-credential")) {
+        systemErrorMessage = "E-mail ou senha incorretos.";
+      } else {
+        systemErrorMessage = "Ocorreu um erro, por favor tente mais tarde.";
+      }
+
+      setError(systemErrorMessage);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  //Função de logout
+  const logout = async () => {
+    checkIfIsCancelled();
+
+    setLoading(true);
+    setError(null);
+
+    try {
+      await signOut(auth);
+    } catch (error) {
+      console.log(error.message);
+      setError("Ocorreu um erro ao tentar sair.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
     return () => setCancelled(true);
   }, []);
+
   return {
     auth,
     createUser,
     error,
     loading,
+    logout,
+    login,
   };
 };

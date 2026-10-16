@@ -1,17 +1,19 @@
 import { NavLink } from "react-router-dom";
+import { useAuthentication } from "../hooks/useAuthentication.jsx";
 import styles from "../styles/styleComponents/navBar/NavBar.module.css";
 import { useAuthValue } from "../hooks/useAuthValue.jsx";
 //Links
 import { links } from "../constants/navLinks.js";
 const NavBar = () => {
   const { user } = useAuthValue();
+  const { logout, loading } = useAuthentication();
   const getLinkClass = ({ isActive }) => (isActive ? styles.active : "");
-
   const visibleLinks = links.filter((link) => {
     if (link.auth === undefined) return true;
     if (link.auth === false) return !user;
     if (link.auth === true) return !!user;
   });
+
   return (
     <nav className={styles.nav}>
       <h3>Mini Blog</h3>
@@ -23,6 +25,12 @@ const NavBar = () => {
             </NavLink>
           </li>
         ))}
+        {user && (
+          <button onClick={logout} disabled={loading}>
+            {" "}
+            {loading ? "Saindo..." : "Logout"}
+          </button>
+        )}
       </ul>
     </nav>
   );

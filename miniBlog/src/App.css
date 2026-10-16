@@ -14,3 +14,7 @@ body,
 .container {
   flex: 1; /* cresce e empurra o footer pra baixo */
 }
+.loading {
+  text-align: center;
+  margin-top: 60px;
+}
