@@ -1,4 +1,4 @@
-import { useState, useEffect, useReducer } from "react";
+import { useReducer } from "react";
 import { db } from "../firebase/config.js";
 import { collection, addDoc, Timestamp } from "firebase/firestore";
 
@@ -13,46 +13,34 @@ const insertReducer = (state, action) => {
       return { loading: true, error: null };
     case "INSERTED_DOC":
       return { loading: false, error: null };
-
     case "ERROR":
       return { loading: false, error: action.payload };
-
     default:
       return state;
   }
 };
 
 export const useInsertDocument = (docCollection) => {
-  const [cancelled, setCancelled] = useState(false);
   const [response, dispatch] = useReducer(insertReducer, initialState);
 
-  const checkCanelBeforeDispatch = (action) => {
-    if (!cancelled) {
-      dispatch(action);
-    }
-  };
   const insertDocument = async (document) => {
+    dispatch({ type: "LOADING" });
+
     try {
       const newDocument = { ...document, createdAt: Timestamp.now() };
       await addDoc(collection(db, docCollection), newDocument);
-      checkCanelBeforeDispatch({
+
+      dispatch({
         type: "INSERTED_DOC",
-        payload: insertDocument,
+        payload: newDocument,
       });
     } catch (error) {
-      checkCanelBeforeDispatch({
+      dispatch({
         type: "ERROR",
         payload: error.message,
       });
     }
   };
-  checkCanelBeforeDispatch({
-    type: "LOADING",
-    payload: insertDocument,
-  });
-  //memory leak
-  useEffect(() => {
-    return () => setCancelled(true);
-  }, []);
+
   return { insertDocument, response };
 };

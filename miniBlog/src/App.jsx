@@ -8,6 +8,7 @@ import Register from "./pages/Register/Register.jsx";
 import Login from "./pages/Login/Login.jsx";
 import CreatePost from "./pages/CreatePost/CreatePost.jsx";
 import Dashboard from "./pages/Dashboard/Dashboard.jsx";
+import Search from "./pages/Search/Search.jsx";
 //Components
 import NavBar from "./components/NavBar.jsx";
 import Footer from "./components/Footer.jsx";
@@ -55,6 +56,7 @@ function App() {
                 path="/dashboard"
                 element={user ? <Dashboard /> : <Navigate to="/login" />}
               ></Route>
+              <Route path="/search" element={<Search />}></Route>
             </Routes>
           </div>
           <Footer />

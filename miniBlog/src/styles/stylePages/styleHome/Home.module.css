@@ -1,0 +1,22 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
+}
+.container * {
+  margin-top: 15px;
+}
+.searchForm {
+  display: flex;
+  gap: 5px;
+}
+
+.noPosts p {
+  margin-bottom: 1.5em;
+}
+
+.noPosts a {
+  padding: 10px 15px;
+}
