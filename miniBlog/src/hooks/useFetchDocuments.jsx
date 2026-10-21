@@ -9,15 +9,15 @@ import {
   onSnapshot,
   where,
 } from "firebase/firestore";
-
 export const useFetchDocuments = (docCollection, search = null, uid = null) => {
   const [documents, setDocuments] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(null);
-  const [cancelled, setCancelled] = useState(false);
+
   useEffect(() => {
+    let unsubscribe;
+
     async function loadData() {
-      if (cancelled) return;
       setLoading(true);
       const collectionRef = collection(db, docCollection);
 
@@ -32,7 +32,9 @@ export const useFetchDocuments = (docCollection, search = null, uid = null) => {
         } else {
           q = query(collectionRef, orderBy("createdAt", "desc"));
         }
-        onSnapshot(q, (querySnapshot) => {
+
+        // Armazena a função de cancelamento da inscrição do Firestore
+        unsubscribe = onSnapshot(q, (querySnapshot) => {
           setDocuments(
             querySnapshot.docs.map((doc) => ({
               id: doc.id,
@@ -47,7 +49,14 @@ export const useFetchDocuments = (docCollection, search = null, uid = null) => {
         setError(error.message);
       }
     }
+
     void loadData();
-  }, [docCollection, search, uid, cancelled]);
+
+    // Função de limpeza do useEffect (executada quando o componente desmonta)
+    return () => {
+      if (unsubscribe) unsubscribe();
+    };
+  }, [docCollection, search, uid]);
+
   return { documents, loading, error };
 };

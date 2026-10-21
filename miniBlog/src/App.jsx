@@ -9,6 +9,7 @@ import Login from "./pages/Login/Login.jsx";
 import CreatePost from "./pages/CreatePost/CreatePost.jsx";
 import Dashboard from "./pages/Dashboard/Dashboard.jsx";
 import Search from "./pages/Search/Search.jsx";
+import Post from "./pages/Post/Post.jsx";
 //Components
 import NavBar from "./components/NavBar.jsx";
 import Footer from "./components/Footer.jsx";
@@ -57,6 +58,7 @@ function App() {
                 element={user ? <Dashboard /> : <Navigate to="/login" />}
               ></Route>
               <Route path="/search" element={<Search />}></Route>
+              <Route path="/posts/:id" element={<Post />}></Route>
             </Routes>
           </div>
           <Footer />
