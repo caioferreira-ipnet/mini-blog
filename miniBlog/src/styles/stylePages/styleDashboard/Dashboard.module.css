@@ -14,10 +14,7 @@
   justify-content: center;
   gap: 2rem;
 }
-.noposts a {
-  width: 100%;
-  padding: 1rem;
-}
+
 .post {
   display: flex;
   flex-direction: column;
@@ -33,4 +30,7 @@
 }
 .tags {
   text-align: center;
+}
+.editPost {
+  margin-bottom: 5rem;
 }

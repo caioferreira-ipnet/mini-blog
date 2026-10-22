@@ -2,17 +2,14 @@ import styles from "../../styles/stylePages/styleDashboard/Dashboard.module.css"
 import { useAuthValue } from "../../hooks/useAuthValue.jsx";
 import { useFetchDocuments } from "../../hooks/useFetchDocuments.jsx";
 import { Link } from "react-router-dom";
+import { useDeleteDocument } from "../../hooks/useDeleteDocument.jsx";
 const Dashboard = () => {
   const { user } = useAuthValue();
   const uid = user.uid;
+  const { deleteDocument } = useDeleteDocument("posts");
   const { documents: posts, loading } = useFetchDocuments("posts", null, uid);
-  const handleDelete = (id) => {
-    if (loading) return <p>Carregando...</p>;
+  if (loading) return <p>Carregando...</p>;
 
-    // lógica para deletar o post
-
-    console.log("Post deletado:", id);
-  };
   return (
     <div className={styles.dash}>
       <h1>Meu DashBoard</h1>
@@ -28,16 +25,16 @@ const Dashboard = () => {
         <div>
           {posts?.map((post) => (
             <div className={styles.post} key={post.id}>
-              <h5>{post.title}</h5>
+              <h2>{post.title}</h2>
 
               <img src={post.image} alt={post.title} />
-              <p>{post.body}</p>
+              <h3>{post.body}</h3>
               {post.tagsArray.map((tag) => (
                 <span key={tag} className={styles.tag}>
                   {tag}
                 </span>
               ))}
-              <div className="editPost">
+              <div className={styles.editPost}>
                 <Link to={`/posts/${post.id}`} className="btn btnOutline">
                   Ver Post
                 </Link>
@@ -46,7 +43,7 @@ const Dashboard = () => {
                 </Link>
                 <button
                   className="btn btnOutline btnDanger"
-                  onClick={() => handleDelete(post.id)}
+                  onClick={() => deleteDocument(post.id)}
                 >
                   Deletar Post
                 </button>

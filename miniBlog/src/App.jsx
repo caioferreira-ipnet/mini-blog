@@ -10,6 +10,7 @@ import CreatePost from "./pages/CreatePost/CreatePost.jsx";
 import Dashboard from "./pages/Dashboard/Dashboard.jsx";
 import Search from "./pages/Search/Search.jsx";
 import Post from "./pages/Post/Post.jsx";
+import EditPost from "./pages/EditPost/EditPost.jsx";
 //Components
 import NavBar from "./components/NavBar.jsx";
 import Footer from "./components/Footer.jsx";
@@ -58,7 +59,11 @@ function App() {
                 element={user ? <Dashboard /> : <Navigate to="/login" />}
               ></Route>
               <Route path="/search" element={<Search />}></Route>
-              <Route path="/posts/:id" element={<Post />}></Route>
+              <Route path="/post/:id" element={<Post />}></Route>
+              <Route
+                path="/posts/edit/:id"
+                element={user ? <EditPost /> : <Navigate to="/login" />}
+              ></Route>
             </Routes>
           </div>
           <Footer />

@@ -58,7 +58,7 @@ export const useFetchDocuments = (docCollection, search = null, uid = null) => {
 
     void loadData();
 
-    // Função de limpeza do useEffect (executada quando o componente desmonta)
+    // Função de limpeza do useEffect
     return () => {
       if (unsubscribe) unsubscribe();
     };
