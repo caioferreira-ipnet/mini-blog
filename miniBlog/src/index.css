@@ -50,9 +50,11 @@ nav button {
   background-color: black;
 }
 .btn.btnDanger {
+  background-color: white;
+}
+.btn.btnDanger:hover {
   background-color: red;
 }
-
 .btn[disabled] {
   background-color: #aaa;
 }
